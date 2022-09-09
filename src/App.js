@@ -4,7 +4,9 @@ import CartSummary from './Components/CartSummary';
 
 function App() {
   return (
-    <div className="App">
+    <div
+    style={{fontFamily: "'Titillium Web', sans-serif"}}
+    className="App bg-white max-w-[1200px] mx-auto">
       <CartSummary/>
     </div>
   );
