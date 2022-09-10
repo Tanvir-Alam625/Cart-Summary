@@ -6,6 +6,7 @@ export default function CartSummary() {
   const{products,loading, refech, setRefech}=useProducts();
   const [filteringC,setFilteringC]=useState(null)
   const [filteringS,setFilteringS]=useState(null)
+  const [searchResult,setSearchResult]=useState(null)
   if(loading){
     return <h2>Loading data...</h2>
   }
@@ -24,13 +25,22 @@ export default function CartSummary() {
       setFilteringC(categoryFilter)
 
   }
+  // reset function 
   const getResetFilter  = ()=>{
     setFilteringC(null)
     setFilteringS(null)
     setRefech(!refech)
   }
-  console.log("category",filteringC);
-  console.log("size",filteringS);
+  // search function 
+  const getSearchProduct=(e)=>{
+    const serachType =e.target.value.toUpperCase();
+    const searchProducts = products.filter(product=>product.name.includes(serachType))
+    setSearchResult(searchProducts);
+    setFilteringC(null)
+    setFilteringS(null)
+    
+  }
+
   return (
     <div className='my-6 bg-light mx-2'>
       <h2 className='text-2xl my-4'>Order Summary</h2>
@@ -66,9 +76,9 @@ export default function CartSummary() {
           </form>
         </div>
         <div className="search-filtering flex justify-end  w-[50%]">
-        <div class="flex">
+        <div class="flex items-center text-xl">
           <span>Search:</span>
-          <input type="text" placeholder="Type here"  className="input input-bordered input-accent w-[200px] mr-4" />
+          <input type="text" placeholder="Type here" onChange={getSearchProduct}  className="input input-bordered input-accent w-[200px] mr-4" />
         </div>
         <button class="py-2 px-4 bg-blue-500 text-white">Add to Cart</button>
         </div>
@@ -90,14 +100,21 @@ export default function CartSummary() {
         </thead>
         <tbody>
           {/* <!-- row 1 --> */}
-          { !filteringC &&
+          { !filteringC && !searchResult &&
             products?.map(product=> <CartRow product={product} key={product?._id}/>)
           }
-          {
+          {/* show the category filtering products */}
+           {
             filteringC && !filteringS && filteringC?.map(product=> <CartRow product={product} key={product?._id}/>)
           }
+          {/* show the size filtering products  */}
           {
             filteringS && filteringS?.map(product=> <CartRow product={product} key={product?._id}/>)
+          }
+          {/* show the searching products  */}
+          {
+          searchResult&& searchResult?.map(product=> <CartRow product={product} key={product?._id}/>)
+
           }
           </tbody>
       </table>

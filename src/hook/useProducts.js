@@ -13,7 +13,7 @@ const useProducts= ()=>{
         })
     },[refech])
 
-    return{products,loading, refech, setRefech}
+    return{products,loading, refech, setRefech,}
 
 }
 export default useProducts;
