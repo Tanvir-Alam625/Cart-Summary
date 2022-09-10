@@ -1,11 +1,16 @@
 import React from 'react'
+import useProducts from '../hook/useProducts'
+import  CartRow  from './CartRow';
 
 export default function CartSummary() {
+  const{products,loading}=useProducts();
+  if(loading){
+    return <h2>Loading data...</h2>
+  }
   return (
-    <div className='mt-6 bg-light'>
+    <div className='my-6 bg-light mx-2'>
       <h2 className='text-2xl'>Order Summary</h2>
       {/* start cart form  */}
-      .
 
       <div className="overflow-x-auto w-full">
       <table className="table w-full">
@@ -16,42 +21,17 @@ export default function CartSummary() {
             <th>Name</th>
             <th>Stock</th>
             <th>Price</th>
-            <th>
-              Buy
-            </th>
+            <th>Buy</th>
           </tr>
         </thead>
         <tbody>
           {/* <!-- row 1 --> */}
-          <tr>
-            <td>
-              <div className="flex items-center space-x-3">
-                <div className="avatar">
-                  <div className="mask mask-squircle w-12 h-12">
-                    <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                  </div>
-                </div>
-                <div>
-                  <div className="font-bold">Hart Hagerty</div>
-                  <div className="text-sm opacity-50">United States</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              Zemlak, Daniel and Leannon
-              
-            </td>
-            <td>Purple</td>
-            <th>
-              <button className="btn btn-ghost btn-xs">details</button>
-            </th>
-          </tr>
+          {
+            products?.map(product=> <CartRow product={product} key={product?._id}/>)
+          }
           </tbody>
-        
       </table>
-  </div>
-      
-
+      </div>
     </div>
   )
 }
