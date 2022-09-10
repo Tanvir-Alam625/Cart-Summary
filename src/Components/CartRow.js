@@ -21,7 +21,7 @@ const CartRow = ({product}) => {
                 }
             </td>
             <td>{stock>0?<span className='text-green-500'>In Stock</span>:<span className='text-red-500'>Out of Stock</span>}</td>
-            <th>
+            <th>$
                 {
                     price
                 }
