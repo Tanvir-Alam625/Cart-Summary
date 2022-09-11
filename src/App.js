@@ -1,6 +1,7 @@
 
 import './App.css';
 import CartSummary from './Components/CartSummary';
+import OrderProcced from './Components/OrderProcced';
 import {
   Routes,
   Route,
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<CartSummary/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
+        <Route path="/orderProcced" element={<OrderProcced/>}/>
       </Routes>
     </div>
   );

@@ -1,8 +1,9 @@
 import React,{useState} from 'react'
 import  CheckoutRow from "./CheckoutRow";
-
+import {useNavigate} from "react-router-dom"
 
 const Checkout = () => {
+  const navigate= useNavigate()
   let totalPrice = 0;
   let addedItems = [];
   const getCartItems = localStorage.getItem("shopping-cart");
@@ -12,7 +13,6 @@ const Checkout = () => {
     addedItems =[showingP, ...addedItems]
     const price = showingP.price *showingP.productQuantity
     totalPrice=totalPrice+price
-    
   }
  
   return (
@@ -53,7 +53,10 @@ const Checkout = () => {
               <h3 >Totals:</h3>
               <span >${totalPrice}</span>
             </div>
-            <button className="py-2 px-6 text-white font-bold bg-blue-700 rounded-3xl ">PROCED TO CHECKOUT</button>
+            <button onClick={()=> {
+              navigate("/orderProcced")
+              localStorage.removeItem("shopping-cart")
+              }} className="py-2 px-6 text-white font-bold bg-blue-700 rounded-3xl ">PROCED TO CHECKOUT</button>
         </div>
      </div>
   </div>
