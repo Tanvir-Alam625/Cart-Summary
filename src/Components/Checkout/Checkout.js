@@ -1,13 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import  CheckoutRow from "./CheckoutRow";
- const Checkout = () => {
+
+
+const Checkout = () => {
+  const [totalPrice,setTotalPrice]=useState()
   const getCartItems = localStorage.getItem("shopping-cart");
   const cartProduct = JSON.parse(getCartItems);
   let addedItems = [];
- for( const product in cartProduct ){
-   const showingP = JSON.parse(product)
-   addedItems =[showingP, ...addedItems]
- }
+  for( const product in cartProduct ){
+    const showingP = JSON.parse(product)
+    addedItems =[showingP, ...addedItems]
+    
+  }
  
   return (
     <div className='my-6 bg-light mx-2'>
