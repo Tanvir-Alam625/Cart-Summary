@@ -15,7 +15,6 @@ function App() {
         <Route path="/" element={<CartSummary/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
       </Routes>
-      
     </div>
   );
 }
