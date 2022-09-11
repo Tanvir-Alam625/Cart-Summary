@@ -9,12 +9,12 @@ const addToDb = (product) => {
     }
   
     // add quantity
-    const quantity = shoppingCart[id];
+    const quantity = shoppingCart[product];
     if (quantity) {
       const newQuantity = quantity + 1;
-      shoppingCart[id] = newQuantity;
+      shoppingCart[product] = newQuantity;
     } else {
-      shoppingCart[id] = 1;
+      shoppingCart[product] = 1;
     }
     localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
   };

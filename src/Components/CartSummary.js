@@ -1,12 +1,14 @@
 import React,{useState} from 'react'
 import useProducts from '../hook/useProducts'
-import  CartRow  from './CartRow';
+import  CartRow  from './ProductRow';
+import {useNavigate} from "react-router-dom"
 
 export default function CartSummary() {
   const{products,loading, refech, setRefech}=useProducts();
   const [filteringC,setFilteringC]=useState(null)
   const [filteringS,setFilteringS]=useState(null)
-  const [searchResult,setSearchResult]=useState(null)
+  const [searchResult,setSearchResult]=useState(null);
+  const navigate=useNavigate()
   if(loading){
     return <h2>Loading data...</h2>
   }
@@ -40,6 +42,13 @@ export default function CartSummary() {
     setFilteringS(null)
     
   }
+
+  const getCartItems = localStorage.getItem("shopping-cart");
+ const cartProduct = JSON.parse(getCartItems);
+for( const product in cartProduct ){
+  const showingP = JSON.parse(product)
+  console.log(showingP);
+}
 
   return (
     <div className='my-6 bg-light mx-2'>
@@ -80,7 +89,7 @@ export default function CartSummary() {
           <span>Search:</span>
           <input type="text" placeholder="Type here" onChange={getSearchProduct}  className="input input-bordered input-accent w-[200px] mr-4" />
         </div>
-        <button class="py-2 px-4 bg-blue-500 text-white">Add to Cart</button>
+        <button onClick={()=> navigate("/checkout")} class="py-2 px-4 bg-blue-500 text-white">Add to Cart</button>
         </div>
       </div>
       {/* end Filtering section  */}

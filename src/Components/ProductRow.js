@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
+import { addToDb,removeFromDb } from "../Utilities/FakDB";
 
-const CartRow = ({product}) => {
+const ProductRow = ({product}) => {
     const {name,price,img,stock, _id}=product;
     const[quantity,setQuantity]=useState(1)
     const [check,setCheck]=useState(false);
@@ -11,10 +12,13 @@ const CartRow = ({product}) => {
     }
     const checkingFunction = ()=>{
         setCheck(!check);
-        const addToCartProduct = {_id, img,price,name,quantity}
         if(!check){
-            const selectProduct = {_id,quantity}
-            console.log(selectProduct);
+            const selectedProduct = {_id, img,price,name,productQuantity:quantity}
+            console.log(selectedProduct);
+            addToDb(JSON.stringify(selectedProduct))
+        }
+        else{
+            removeFromDb(_id)
         }
     }
   return (
@@ -25,18 +29,15 @@ const CartRow = ({product}) => {
                 </div>
             </td>
             <td>
-                {
-                    name
-                }
+                {name}
             </td>
             <td>{stock>0?<span className='text-green-500'>In Stock</span>:<span className='text-red-500'>Out of Stock</span>}</td>
             <th>$
-                {
-                    price
-                }
+                {price}
             </th>
             <th>
                 <div className="flex justify-between items-center w-full">
+                    {/* start the  quantity container  */}
                 <div className="p-2 border flex justify-between text-xl rounded-3xl w-[50%]">
                    {
                     !check?  <>
@@ -55,6 +56,8 @@ const CartRow = ({product}) => {
                     </>: <span className="text-green-500 text-md">Added To Cart</span>
                    }
                 </div>
+                    {/* end the  quantity container  */}
+
                 <div className="flex justify-between w-[50%]">
                <div className="py-2 px-4 rounded-md ml-2 bg-gray-400 text-white">
                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
@@ -69,4 +72,4 @@ const CartRow = ({product}) => {
           </tr>
   )
 }
-export default CartRow;
+export default ProductRow;
