@@ -17,9 +17,6 @@ const ProductRow = ({product}) => {
             console.log(selectedProduct);
             addToDb(JSON.stringify(selectedProduct))
         }
-        else{
-            removeFromDb(_id)
-        }
     }
   return (
     <tr>

@@ -18,4 +18,5 @@ const addToDb = (product) => {
     }
     localStorage.setItem("shopping-cart", JSON.stringify(shoppingCart));
   };
-  export { addToDb};
+  
+  export { addToDb };

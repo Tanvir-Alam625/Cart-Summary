@@ -17,7 +17,9 @@ const Checkout = () => {
     <div className='my-6 bg-light mx-2'>
       <h2 className='text-2xl my-4'>Checkout</h2>
       {/* start cart form  */}
-
+      <div className="w-full flex justify-start my-6">
+      <button className="btn btn-secondary text-white" onClick={()=> localStorage.removeItem("shopping-cart")}>Delete All</button>
+      </div>
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           {/* <!-- head --> */}
